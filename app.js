@@ -52,3 +52,29 @@ btnPlay.addEventListener("click", function () {
       currentScore;
   }
 });
+
+btnHold.addEventListener("click", function () {
+  if (playing) {
+    //Add current score to active player's score
+    scores[activePlayer] += currentScore;
+    //scores[1] = scores[1] + currentScore
+    document.getElementById(`score--${activePlayer}`).textContent =
+      scores[activePlayer];
+
+    //Check if player's score is greater than 21
+    if (scores[activePlayer] >= 21) {
+      //Finish the game
+      playing = false;
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.add("player--winner");
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.remove("player--winner");
+    } else {
+      switchPlayers();
+    }
+  }
+});
+
+btnNew.addEventListener("click", init);
